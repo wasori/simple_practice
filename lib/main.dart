@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dotted_border/dotted_border.dart';
 
 void main(){
   runApp(MyApp());
@@ -43,20 +44,24 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: Colors.white,
           leading: IconButton(
               icon: Icon(Icons.keyboard_arrow_left),
-              color: Colors.black38,
+              color: Colors.black,
               iconSize: 35.0,
               onPressed: null),
           title: Text("나의 정보",
-            style: TextStyle(color: Colors.black38),),
+            style: TextStyle(color: Colors.black),),
           centerTitle: true,
           actions: [
             IconButton(icon: Icon(Icons.search),
-                color: Colors.black38,
+                tooltip: '검색',
+                color: Colors.black,
                 onPressed: null),
             IconButton(icon: Icon(Icons.menu),
                 tooltip: "메뉴",
                 color: Colors.black38,
                 onPressed: null),
+            TextButton(
+                onPressed: null,
+                child: Text("메뉴"))
           ],
         ),
         body: Column(
@@ -112,15 +117,8 @@ class _MyAppState extends State<MyApp> {
               height: 540,
               child: Column(
                 children: [
+                  _fullWidthPath,
                   Container(
-                    decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            color: Colors.grey.shade400,
-                            width: 2,
-                          )
-                        )
-                    ),
                     width: 450,
                     height:125,
                     margin: EdgeInsets.only(top: 5),
@@ -164,14 +162,6 @@ class _MyAppState extends State<MyApp> {
                     ),
                   ),
                   Container(
-                    decoration: BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(
-                                color: Colors.grey.shade400,
-                                width: 2
-                            )
-                        )
-                    ),
                     width: 450,
                     height:125,
                     margin: EdgeInsets.only(top: 5),
@@ -224,14 +214,6 @@ class _MyAppState extends State<MyApp> {
                     ),
                   ),
                   Container(
-                    decoration: BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(
-                                color: Colors.grey.shade400,
-                                width: 2
-                            )
-                        )
-                    ),
                     width: 450,
                     height:125,
                     margin: EdgeInsets.only(top: 5),
@@ -341,31 +323,50 @@ class _MyAppState extends State<MyApp> {
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
           elevation: 0.5,
           // currentIndex: navIndex,
           // // onTap: changeNavIndex,
           // onTap: (index) => changeNavIndex(index),
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(Icons.home,),
               label: "홈",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search),
+              icon: Icon(Icons.search,),
               label: "과정검색",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.account_box_rounded),
+              icon: Icon(Icons.account_box_rounded,),
               label: "나의정보",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.add_alert),
-              label: "도움말",
+              icon: Icon(Icons.add_alert,),
+              label:"도움말",
             ),
           ],
-          selectedItemColor: Colors.blue,
-          unselectedItemColor: Colors.black38,
+          selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+          unselectedItemColor: Colors.black,
         ),
+      ),
+    );
+  }
+  Widget get _fullWidthPath {
+    return DottedBorder(
+      color: Colors.black12,
+      customPath: (size) {
+        return Path()
+          ..moveTo(20,133)
+          ..lineTo(420,133)
+          ..moveTo(20,263)
+          ..lineTo(420,263)
+          ..moveTo(20,393)
+          ..lineTo(420,393);
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(0.0),
+        child: Container(),
       ),
     );
   }
